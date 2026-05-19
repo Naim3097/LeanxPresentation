@@ -241,6 +241,50 @@
       line-height: 1.5;
     }
 
+    /* ─── JOURNEY / HISTORY SLIDE ──────────────────────────── */
+    .journey-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 40px 1fr 40px 1fr;
+      gap: 0;
+      align-items: stretch;
+      min-height: 0;
+    }
+    .journey-step {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 24px 26px;
+      display: flex; flex-direction: column;
+      min-height: 0;
+    }
+    .journey-step .js-month {
+      font-size: 11px; font-weight: 700;
+      color: var(--blue); letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .journey-step h4 {
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.015em; line-height: 1.15;
+      margin-bottom: 12px; color: #fff;
+    }
+    .journey-step p {
+      font-size: 13px; color: var(--muted);
+      line-height: 1.55; flex: 1;
+    }
+    .journey-step .js-meta {
+      margin-top: 18px; padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 11px; color: var(--blue);
+      font-weight: 700; letter-spacing: 0.04em;
+    }
+    .js-arrow {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; color: var(--blue);
+      opacity: 0.6;
+    }
+
     /* ─── FEATURE SLIDES (NEW) ─────────────────────────────── */
     .feature-slide { padding: 56px 72px 72px; }
 
@@ -788,37 +832,38 @@
     .ask-copy strong { color: #fff; font-weight: 600; }
 
     /* ─── BUDGET TABLE ─────────────────────────────────────── */
-    .budget-wrap { flex: 1; display: flex; flex-direction: column; }
+    .budget-wrap { flex: 1; display: flex; flex-direction: column; min-height: 0; }
     table.budget {
       width: 100%; border-collapse: collapse;
-      font-size: 14px; background: var(--bg-2);
+      font-size: 13px; background: var(--bg-2);
       border: 1px solid var(--border); border-radius: 6px;
       overflow: hidden;
     }
     table.budget th {
-      text-align: left; font-size: 10px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.14em;
-      color: var(--muted); padding: 14px 20px;
+      text-align: left; font-size: 9.5px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--muted); padding: 9px 16px;
       background: rgba(0,0,0,0.025);
       border-bottom: 1px solid var(--border);
     }
     table.budget th.r { text-align: right; }
     table.budget td {
-      padding: 13px 20px;
+      padding: 8px 16px;
       border-bottom: 1px solid var(--border);
+      line-height: 1.4;
     }
     table.budget td.r { text-align: right; font-weight: 700; color: var(--blue); }
     table.budget td.bucket { font-weight: 700; color: var(--dark); }
-    table.budget td.what { font-size: 12.5px; color: var(--mid); }
+    table.budget td.what { font-size: 11.5px; color: var(--mid); }
     table.budget tr.total td {
       background: rgba(37,99,235,0.06);
       border-top: 2px solid var(--blue);
       border-bottom: none;
       font-weight: 700; color: var(--dark);
-      padding-top: 16px; padding-bottom: 16px;
+      padding-top: 11px; padding-bottom: 11px;
     }
     table.budget tr.total td.r {
-      font-size: 17px; color: var(--blue);
+      font-size: 16px; color: var(--blue);
     }
 
     /* ─── JUSTIFY CARDS ────────────────────────────────────── */
@@ -1150,6 +1195,8 @@
       .funnel-wrap { grid-template-columns: 1fr; }
       .f-detail { grid-template-columns: 70px 1fr; }
       .f-detail .fd-earn { display: none; }
+      .journey-grid { grid-template-columns: 1fr; gap: 14px; }
+      .js-arrow { display: none; }
       .grid-3-3 { grid-template-columns: repeat(3, 1fr); grid-template-rows: auto; }
     }
     @media (max-width: 720px) {
@@ -1204,10 +1251,58 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 02 · BY THE NUMBERS                                -->
+    <!-- 02 · HOW WE GOT HERE                                -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-dark">
       <div class="slide-no">02</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> The Story So Far</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">How we got here</div>
+        <h2 class="headline">Three months. <span class="accent">Three evolutions of strategy.</span></h2>
+        <p class="lede" style="margin-top: 10px; margin-bottom: 0;">The collaboration with Lean.x grew step by step. This slide tells where we started, what changed, and what this deck presents.</p>
+      </div>
+
+      <div class="body" style="margin-top: 28px;">
+        <div class="journey-grid">
+
+          <div class="journey-step">
+            <div class="js-month">Month 1</div>
+            <h4>Brand Presence &amp; Social Media</h4>
+            <p>The starting engagement: 15 social media posts per month, static visuals, and ads-style graphic designs &mdash; for brand visibility and digital reach across Lean.x's audience.</p>
+            <div class="js-meta">RM 5,500 / mo · RM 500–1,000 ads included</div>
+          </div>
+
+          <div class="js-arrow">→</div>
+
+          <div class="journey-step">
+            <div class="js-month">Month 2</div>
+            <h4>WhatsApp Conversation Ads</h4>
+            <p>Lean.x was ready to convert leads via WhatsApp. The traditional top-of-funnel was collapsed and replanned straight into <strong>engagement &rarr; conversion</strong> &mdash; shorter path, faster signal.</p>
+            <div class="js-meta">Strategy shortened to speed</div>
+          </div>
+
+          <div class="js-arrow">→</div>
+
+          <div class="journey-step">
+            <div class="js-month">Month 3 →</div>
+            <h4>Full Ecosystem Built</h4>
+            <p>Nexova Digital proposed and shipped the complete merchant acquisition ecosystem &mdash; the full nexova.my platform, SEO satellites, AI tooling, Lean.x social, marketplace, and Nexova Digital agency arm.</p>
+            <div class="js-meta">What the rest of this deck presents</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 03 · BY THE NUMBERS                                -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-dark">
+      <div class="slide-no">03</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> The Headline</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1232,20 +1327,20 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 03 · PART 1 DIVIDER                                -->
+    <!-- 04 · PART 1 DIVIDER                                -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-dark divider-slide">
-      <div class="slide-no">03</div>
+      <div class="slide-no">04</div>
       <div class="part-no">— Part One</div>
       <h2>What we<br>built.</h2>
       <p>Nine production subsystems that turn a blank Nexova account into a working online business with Lean.x at checkout.</p>
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 04 · 9 SUBSYSTEMS OVERVIEW                         -->
+    <!-- 05 · SUBSYSTEMS OVERVIEW                           -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-light">
-      <div class="slide-no">04</div>
+      <div class="slide-no">05</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 01 · Capability Upgrades</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1274,10 +1369,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 05 · VISUAL BUILDER                                -->
+    <!-- 06 · VISUAL BUILDER                                -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-white feature-slide">
-      <div class="slide-no">05</div>
+      <div class="slide-no">06</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 01 · Visual Builder</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1303,10 +1398,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 06 · TEMPLATE LIBRARY                              -->
+    <!-- 07 · TEMPLATE LIBRARY                              -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-white feature-slide">
-      <div class="slide-no">06</div>
+      <div class="slide-no">07</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 02 · Template Library</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1332,10 +1427,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 07 · PUBLISHING & DOMAINS                          -->
+    <!-- 08 · PUBLISHING & DOMAINS                          -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-white feature-slide">
-      <div class="slide-no">07</div>
+      <div class="slide-no">08</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 03 · Publishing &amp; Domains</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1361,10 +1456,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 08 · NATIVE LEAN.X PAYMENTS                        -->
+    <!-- 09 · NATIVE LEAN.X PAYMENTS                        -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-white feature-slide">
-      <div class="slide-no">08</div>
+      <div class="slide-no">09</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 04 · Native Lean.x Payments</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1390,10 +1485,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 09 · COMMERCE STACK                                -->
+    <!-- 10 · COMMERCE STACK                                -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-white feature-slide">
-      <div class="slide-no">09</div>
+      <div class="slide-no">10</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 05 · Commerce Stack</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1419,10 +1514,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 10 · FORMS & BOOKINGS                              -->
+    <!-- 11 · FORMS & BOOKINGS                              -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-white feature-slide">
-      <div class="slide-no">10</div>
+      <div class="slide-no">11</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 06 · Forms &amp; Bookings</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1448,10 +1543,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 11 · ANALYTICS & TRACKING                          -->
+    <!-- 12 · ANALYTICS & TRACKING                          -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-white feature-slide">
-      <div class="slide-no">11</div>
+      <div class="slide-no">12</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 07 · Analytics &amp; Tracking</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1477,10 +1572,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 12 · AI STUDIO                                     -->
+    <!-- 13 · AI STUDIO                                     -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-white feature-slide">
-      <div class="slide-no">12</div>
+      <div class="slide-no">13</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 08 · AI Studio</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1506,10 +1601,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 13 · ADMIN & GROWTH                                -->
+    <!-- 14 · ADMIN & GROWTH                                -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-white feature-slide">
-      <div class="slide-no">13</div>
+      <div class="slide-no">14</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 09 · Admin &amp; Growth</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1534,10 +1629,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 14 · TEMPLATE MARKETPLACE                           -->
+    <!-- 15 · TEMPLATE MARKETPLACE                           -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-white feature-slide">
-      <div class="slide-no">14</div>
+      <div class="slide-no">15</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 10 · Template Marketplace</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1568,10 +1663,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 15 · BUILD TIMELINE                                -->
+    <!-- 16 · BUILD TIMELINE                                -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-dark">
-      <div class="slide-no">15</div>
+      <div class="slide-no">16</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 02 · Build Timeline</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1632,10 +1727,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 16 · LIVE PROOF — GLIMSY                          -->
+    <!-- 17 · LIVE PROOF — GLIMSY                          -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-light">
-      <div class="slide-no">16</div>
+      <div class="slide-no">17</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> Live Proof</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1699,20 +1794,20 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 17 · PART 2 DIVIDER                                -->
+    <!-- 18 · PART 2 DIVIDER                                -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-dark divider-slide">
-      <div class="slide-no">17</div>
+      <div class="slide-no">18</div>
       <div class="part-no">— Part Two</div>
       <h2>The<br>ecosystem.</h2>
       <p>Six properties that feed Lean.x &mdash; two SEO satellites, Lean.x social media, the core builder, the agency arm, and Lean.x itself at the centre.</p>
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 18 · FIVE ASSETS                                   -->
+    <!-- 19 · FIVE ASSETS                                   -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-light">
-      <div class="slide-no">18</div>
+      <div class="slide-no">19</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 03 · The Six Assets</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1820,10 +1915,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 19 · ECOSYSTEM MAP                                 -->
+    <!-- 20 · ECOSYSTEM MAP                                 -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-dark">
-      <div class="slide-no">19</div>
+      <div class="slide-no">20</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 04 · Ecosystem Map</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1913,10 +2008,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 20 · FOUR LAYERS                                   -->
+    <!-- 21 · FOUR LAYERS                                   -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-alt">
-      <div class="slide-no">20</div>
+      <div class="slide-no">21</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 05 · The Four Layers</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -1958,10 +2053,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 21 · CONVERSION FUNNEL                             -->
+    <!-- 22 · CONVERSION FUNNEL                             -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-light">
-      <div class="slide-no">21</div>
+      <div class="slide-no">22</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 06 · The Conversion Funnel</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -2044,10 +2139,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 22 · REVENUE MAP                                   -->
+    <!-- 23 · REVENUE MAP                                   -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-light">
-      <div class="slide-no">22</div>
+      <div class="slide-no">23</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 07 · Lean.x Revenue Map</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -2087,10 +2182,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 23 · MONTHLY SCORECARD                             -->
+    <!-- 24 · MONTHLY SCORECARD                             -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-dark">
-      <div class="slide-no">23</div>
+      <div class="slide-no">24</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 08 · Monthly Scorecard</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -2148,10 +2243,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 24 · THE ASK                                       -->
+    <!-- 25 · THE ASK                                       -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-dark">
-      <div class="slide-no">24</div>
+      <div class="slide-no">25</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 09 · The Investment</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -2161,15 +2256,15 @@
         <div class="ask-wrap">
 
           <div class="ask-num">
-            <span class="ask-l">Monthly operating ask</span>
-            <span class="ask-big"><span class="currency">RM</span>12,000</span>
+            <span class="ask-l">Monthly operating budget</span>
+            <span class="ask-big"><span class="currency">RM</span>15,000</span>
             <span class="ask-unit">per month · all-in</span>
           </div>
 
           <div class="ask-copy">
-            <h3>The platform is built.<br>The assets are live.<br>This is the cost to run them.</h3>
-            <p>This is the <strong>monthly operating budget</strong> that turns four owned properties into a constant flow of Lean.x merchants.</p>
-            <p>No build cost. No hidden line items. One number, every month, fully allocated across paid media, content, infrastructure, and the agency launch.</p>
+            <h3>The platform is built.<br>The assets are live.<br>This is the budget to run them at full efficiency.</h3>
+            <p>RM 15,000 is allocated for <strong>maximum acquisition efficiency</strong> &mdash; ~63% direct paid ads (META, WhatsApp, Google, TikTok), ~17% organic compounding (SEO + Lean.x Social content), ~10% infrastructure, ~10% growth activation (KOL + agency launch).</p>
+            <p>No build cost. No hidden line items. Every ringgit deployed to shorten the path from traffic to a Lean.x transaction.</p>
           </div>
 
         </div>
@@ -2177,21 +2272,21 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 25 · BUDGET BREAKDOWN                              -->
+    <!-- 26 · BUDGET BREAKDOWN                              -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-light">
-      <div class="slide-no">25</div>
+      <div class="slide-no">26</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> 10 · Where the budget goes</div>
         <div class="brand-mark">Nexova × Lean.x</div>
       </div>
 
       <div>
-        <div class="eyebrow">Budget breakdown</div>
-        <h2 class="headline">Every ringgit, <span class="accent">accounted for</span>.</h2>
+        <div class="eyebrow" style="margin-bottom: 8px;">Budget breakdown</div>
+        <h2 class="headline" style="font-size: clamp(28px, 3.4vw, 42px); margin-bottom: 0;">Every ringgit, <span class="accent">accounted for</span>.</h2>
       </div>
 
-      <div class="body" style="margin-top: 24px;">
+      <div class="body" style="margin-top: 16px;">
         <div class="budget-wrap">
           <table class="budget">
             <thead>
@@ -2204,63 +2299,69 @@
             </thead>
             <tbody>
               <tr>
+                <td class="bucket">META Ads spend</td>
+                <td class="what">facebookads.my + nexova.my</td>
+                <td class="what">Facebook &amp; Instagram for SMB founders + retargeting</td>
+                <td class="r">3,500</td>
+              </tr>
+              <tr>
                 <td class="bucket">Google Ads spend</td>
                 <td class="what">googleadsagency.my + nexova.my</td>
-                <td class="what">PPC for "google ads agency Malaysia" + Nexova intent terms</td>
+                <td class="what">PPC for high-intent commercial keywords + Nexova brand terms</td>
                 <td class="r">2,500</td>
               </tr>
               <tr>
-                <td class="bucket">META Ads spend</td>
-                <td class="what">facebookads.my + nexova.my</td>
-                <td class="what">Facebook / Instagram for SMB founders + retargeting</td>
-                <td class="r">2,500</td>
+                <td class="bucket">Ad ops &amp; creative team</td>
+                <td class="what">All paid channels</td>
+                <td class="what">Daily campaign management, creative production (graphics, video, copy), A/B testing &amp; reporting</td>
+                <td class="r">2,000</td>
               </tr>
               <tr>
                 <td class="bucket">TikTok Ads spend</td>
                 <td class="what">nexova.my + Nexova Digital</td>
                 <td class="what">Founder content + DFY agency lead-gen ads</td>
-                <td class="r">1,000</td>
-              </tr>
-              <tr>
-                <td class="bucket">SEO &amp; outreach</td>
-                <td class="what">Both satellites + nexova.my</td>
-                <td class="what">Ahrefs, Surfer SEO, paid backlinks &amp; guest posts</td>
                 <td class="r">1,500</td>
               </tr>
               <tr>
-                <td class="bucket">AI &amp; creative tools</td>
-                <td class="what">All assets</td>
-                <td class="what">ChatGPT Team, Claude, Midjourney, Runway, Canva Pro</td>
-                <td class="r">1,200</td>
+                <td class="bucket">Lean.x Social Media content</td>
+                <td class="what">Lean.x Social</td>
+                <td class="what">Content production + boosted posts driving direct traffic to leanx.io</td>
+                <td class="r">1,500</td>
               </tr>
               <tr>
-                <td class="bucket">Hosting &amp; infrastructure</td>
-                <td class="what">nexova.my + satellites</td>
-                <td class="what">Vercel Pro, Supabase Pro, SSL pool, Sentry monitoring</td>
+                <td class="bucket">SEO content &amp; outreach</td>
+                <td class="what">Both satellites + nexova.my</td>
+                <td class="what">Ahrefs, Surfer SEO, paid backlinks &amp; guest posts</td>
                 <td class="r">1,000</td>
               </tr>
               <tr>
-                <td class="bucket">Messaging &amp; recovery</td>
-                <td class="what">nexova.my</td>
-                <td class="what">WhatsApp Business API, transactional email, SMS</td>
-                <td class="r">700</td>
-              </tr>
-              <tr>
-                <td class="bucket">Influencer &amp; KOL</td>
+                <td class="bucket">Influencer &amp; KOL collabs</td>
                 <td class="what">nexova.my + Nexova Digital</td>
                 <td class="what">Micro-KOL collabs in Malaysian SMB / e-commerce niches</td>
                 <td class="r">800</td>
               </tr>
               <tr>
+                <td class="bucket">AI &amp; creative tools</td>
+                <td class="what">All assets</td>
+                <td class="what">ChatGPT Team, Claude, Midjourney, Runway, Canva Pro</td>
+                <td class="r">800</td>
+              </tr>
+              <tr>
+                <td class="bucket">Hosting &amp; infrastructure</td>
+                <td class="what">nexova.my + satellites</td>
+                <td class="what">Vercel Pro, Supabase Pro, SSL pool, Sentry monitoring</td>
+                <td class="r">700</td>
+              </tr>
+              <tr>
                 <td class="bucket">Nexova Digital launch</td>
                 <td class="what">Nexova Digital</td>
                 <td class="what">Landing site, sales collateral, lead-form tooling</td>
-                <td class="r">800</td>
+                <td class="r">700</td>
               </tr>
               <tr class="total">
                 <td>Total monthly</td>
                 <td colspan="2"></td>
-                <td class="r">RM 12,000</td>
+                <td class="r">RM 15,000</td>
               </tr>
             </tbody>
           </table>
@@ -2269,10 +2370,10 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 26 · JUSTIFICATION                                 -->
+    <!-- 27 · JUSTIFICATION                                 -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-light">
-      <div class="slide-no">26</div>
+      <div class="slide-no">27</div>
       <div class="slide-head">
         <div class="crumb"><span class="dot"></span> Why this budget</div>
         <div class="brand-mark">Nexova × Lean.x</div>
@@ -2330,22 +2431,22 @@
 
         <div class="math-callout">
           <div class="m-l">The Math</div>
-          <p>RM 12,000 / month is the cost of running an ecosystem that <strong>already exists</strong>. Break-even is reached the moment the budget produces additional Lean.x merchants whose combined recurring fees + GMV processing exceed RM 12,000 &mdash; a low bar for a payment gateway.</p>
+          <p>RM 15,000 / month is the full operating cost of running the ecosystem at scale. Break-even is reached the moment the budget produces additional Lean.x merchants whose combined GMV fees + Premium subscriptions + AI Studio tokens exceed RM 15,000 &mdash; a low bar for a payment gateway processing real Malaysian SMB volume.</p>
         </div>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- 27 · CLOSING                                       -->
+    <!-- 28 · CLOSING                                       -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="slide slide-dark closing">
-      <div class="slide-no">27</div>
+      <div class="slide-no">28</div>
       <div>
         <div class="eyebrow" style="margin-bottom: 24px;">— Summary</div>
         <h1>Six assets.<br>One <span class="accent">destination</span>.</h1>
         <p>The ecosystem is built, live, and reporting-ready.<br>The next phase is <strong style="color: #fff;">scale</strong>.</p>
         <div class="next">
-          <span class="nx">RM 12,000 / month</span>
+          <span class="nx">RM 15,000 / month</span>
           <span class="nx">Monthly scorecard to Lean.x</span>
           <span class="nx">Quarterly review cadence</span>
         </div>
@@ -2359,7 +2460,7 @@
     <button id="prevBtn" aria-label="Previous slide">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </button>
-    <div class="counter"><span id="curSlide">1</span><span class="of">/</span><span id="totalSlides">25</span></div>
+    <div class="counter"><span id="curSlide">1</span><span class="of">/</span><span id="totalSlides">28</span></div>
     <button id="nextBtn" aria-label="Next slide">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </button>
