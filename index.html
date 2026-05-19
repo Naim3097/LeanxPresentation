@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexova × Lean.x — Presentation</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #2563eb;
+      --blue-soft: #DBEAFE;
+      --dark: #0a0a0a;
+      --dark-2: #15171b;
+      --mid: #525252;
+      --muted: #a3a3a3;
+      --bg: #f7f7f0;
+      --bg-2: #ffffff;
+      --bg-alt: #eff6ff;
+      --border: #e5e5e5;
+      --border-dark: rgba(255,255,255,0.08);
+      --green: #10B981;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Satoshi', system-ui, -apple-system, sans-serif;
+      background: var(--dark);
+      color: var(--dark);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── DECK SHELL ───────────────────────────────────────── */
+    .deck {
+      position: fixed; inset: 0;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      padding: 64px 80px 80px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease;
+      overflow: hidden;
+    }
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 2;
+    }
+
+    .slide-light { background: var(--bg); color: var(--dark); }
+    .slide-white { background: var(--bg-2); color: var(--dark); }
+    .slide-dark  { background: var(--dark); color: var(--bg); }
+    .slide-alt   { background: var(--bg-alt); color: var(--dark); }
+
+    /* ─── SLIDE HEADER ─────────────────────────────────────── */
+    .slide-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 40px;
+      flex-shrink: 0;
+    }
+    .crumb {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+    .crumb .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--blue);
+    }
+    .slide-light .crumb, .slide-white .crumb, .slide-alt .crumb { color: var(--mid); }
+
+    .brand-mark {
+      font-size: 13px; font-weight: 700; letter-spacing: -0.01em;
+      color: var(--muted);
+    }
+    .slide-light .brand-mark, .slide-white .brand-mark, .slide-alt .brand-mark { color: var(--mid); }
+
+    /* ─── TYPOGRAPHY ───────────────────────────────────────── */
+    .eyebrow {
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--blue); margin-bottom: 16px;
+    }
+    h1.headline {
+      font-size: clamp(48px, 6vw, 88px);
+      font-weight: 300; line-height: 1.0; letter-spacing: -0.035em;
+      margin-bottom: 24px;
+    }
+    h2.headline {
+      font-size: clamp(34px, 4.2vw, 56px);
+      font-weight: 400; line-height: 1.05; letter-spacing: -0.025em;
+      margin-bottom: 24px;
+    }
+    h3.headline {
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 500; line-height: 1.1; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .headline .accent { color: var(--blue); }
+    .lede {
+      font-size: clamp(15px, 1.3vw, 18px);
+      font-weight: 400; color: var(--mid);
+      max-width: 720px; line-height: 1.5;
+    }
+    .slide-dark .lede { color: var(--muted); }
+
+    .body { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+
+    /* ─── COVER ────────────────────────────────────────────── */
+    .cover {
+      justify-content: space-between;
+      padding: 80px;
+    }
+    .cover .cover-top {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .cover .cover-mark {
+      font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #fff;
+    }
+    .cover .cover-meta {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+    .cover .cover-mid {
+      display: flex; flex-direction: column; gap: 32px;
+      flex: 1; justify-content: center;
+    }
+    .cover h1 {
+      font-size: clamp(56px, 9vw, 140px);
+      font-weight: 200; line-height: 0.92;
+      letter-spacing: -0.045em; color: #fff;
+    }
+    .cover h1 .accent { color: var(--blue); }
+    .cover .cover-sub {
+      font-size: clamp(17px, 1.6vw, 22px);
+      color: var(--muted); max-width: 640px; line-height: 1.5;
+    }
+    .cover .cover-bottom {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 32px;
+    }
+    .cover .cover-pair {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .cover .cover-pair .l {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+    }
+    .cover .cover-pair .v {
+      font-size: 14px; font-weight: 500; color: #fff;
+    }
+
+    /* ─── DIVIDER (PART) ───────────────────────────────────── */
+    .divider-slide {
+      justify-content: center; align-items: flex-start;
+      padding: 80px;
+    }
+    .divider-slide .part-no {
+      font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.2em;
+      color: var(--blue); margin-bottom: 16px;
+    }
+    .divider-slide h2 {
+      font-size: clamp(64px, 10vw, 160px);
+      font-weight: 200; line-height: 0.95;
+      letter-spacing: -0.045em; color: #fff;
+      margin-bottom: 32px;
+    }
+    .divider-slide p {
+      font-size: clamp(16px, 1.4vw, 20px);
+      color: var(--muted); max-width: 560px; line-height: 1.55;
+    }
+
+    /* ─── STATS ────────────────────────────────────────────── */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--border-dark);
+      border-left: 1px solid var(--border-dark);
+      flex: 1;
+      align-content: stretch;
+    }
+    .stat {
+      padding: 36px 32px;
+      border-right: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .stat .num {
+      font-size: clamp(56px, 6vw, 88px);
+      font-weight: 700; color: #fff;
+      line-height: 1; letter-spacing: -0.035em;
+    }
+    .stat .lbl {
+      font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted); margin-top: 24px;
+    }
+
+    /* ─── CARD GRIDS ───────────────────────────────────────── */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-3-3 { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: auto auto; gap: 14px; flex: 1; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+
+    .ft-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 22px 24px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .ft-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .ft-card .ft-num {
+      font-size: 11px; font-weight: 700;
+      color: var(--blue); letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .ft-card h4 {
+      font-size: 17px; font-weight: 700;
+      letter-spacing: -0.01em; margin-bottom: 8px;
+    }
+    .ft-card p {
+      font-size: 13px; color: var(--mid);
+      line-height: 1.5;
+    }
+
+    /* ─── FEATURE SLIDES (NEW) ─────────────────────────────── */
+    .feature-slide { padding: 56px 72px 72px; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 340px) 1fr;
+      gap: 56px;
+      flex: 1;
+      align-items: center;
+      min-height: 0;
+    }
+    .feature-meta {
+      display: flex; flex-direction: column; gap: 12px;
+      min-width: 0;
+    }
+    .feature-step {
+      font-size: 11px; font-weight: 700;
+      color: var(--blue); letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .feature-slide h3.headline {
+      font-size: clamp(28px, 3.2vw, 44px);
+      font-weight: 500; line-height: 1.05;
+      letter-spacing: -0.025em; margin: 0;
+    }
+    .feature-desc {
+      font-size: 14px; color: var(--mid);
+      line-height: 1.6; margin-top: 4px;
+    }
+    .feature-points {
+      list-style: none; padding: 0;
+      display: flex; flex-direction: column; gap: 8px;
+      margin-top: 12px;
+    }
+    .feature-points li {
+      font-size: 13px; color: var(--mid);
+      padding-left: 16px; position: relative;
+      line-height: 1.5;
+    }
+    .feature-points li::before {
+      content: ''; position: absolute;
+      left: 0; top: 8px;
+      width: 5px; height: 5px;
+      background: var(--blue); border-radius: 50%;
+    }
+    .feature-points li strong {
+      color: var(--dark); font-weight: 700;
+    }
+    .feature-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700;
+      color: var(--blue); text-decoration: none;
+      margin-top: 16px; letter-spacing: 0.06em;
+      padding: 9px 14px;
+      border: 1px solid rgba(37,99,235,0.25);
+      border-radius: 999px;
+      align-self: flex-start;
+      text-transform: uppercase;
+      transition: background 0.15s, border-color 0.15s;
+      max-width: 100%;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .feature-link:hover {
+      background: rgba(37,99,235,0.06);
+      border-color: var(--blue);
+    }
+    .feature-link .arr {
+      transition: transform 0.15s;
+    }
+    .feature-link:hover .arr {
+      transform: translateX(3px);
+    }
+    .feature-visual {
+      position: relative;
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 0;
+    }
+    .feature-visual img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto; height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.06),
+        0 16px 48px rgba(0,0,0,0.14);
+      border: 1px solid var(--border);
+    }
+
+    /* ─── TIMELINE ─────────────────────────────────────────── */
+    .tl-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 24px; flex: 1;
+    }
+    .tl-col { display: flex; flex-direction: column; }
+    .tl-month {
+      display: inline-block;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--blue);
+      padding: 4px 10px; border: 1px solid rgba(37,99,235,0.3);
+      border-radius: 4px;
+      align-self: flex-start;
+      margin-bottom: 14px;
+    }
+    .tl-col h4 {
+      font-size: 17px; font-weight: 700;
+      color: #fff; margin-bottom: 18px;
+      letter-spacing: -0.01em;
+    }
+    .tl-items { list-style: none; }
+    .tl-items li {
+      position: relative;
+      padding: 0 0 16px 22px;
+      border-left: 1px solid rgba(255,255,255,0.08);
+    }
+    .tl-items li:last-child { border-left: none; padding-bottom: 0; }
+    .tl-items li::before {
+      content: ''; position: absolute; left: -4px; top: 5px;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--blue);
+    }
+    .tl-items .when {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--blue); display: block; margin-bottom: 2px;
+    }
+    .tl-items .what {
+      font-size: 13px; font-weight: 500; color: #fff;
+    }
+
+    /* ─── 5 ASSETS ─────────────────────────────────────────── */
+    .assets-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 14px; flex: 1;
+    }
+    .asset-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .asset-card .a-visual {
+      aspect-ratio: 16 / 6;
+      background: rgba(0,0,0,0.02);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .asset-card .a-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .asset-card .a-visual.placeholder {
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+      color: rgba(255,255,255,0.95);
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      padding: 16px;
+      position: relative;
+    }
+    .asset-card .a-visual.social-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 12px;
+    }
+    .asset-card .a-visual.social-visual .s-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+    }
+    .asset-card .a-visual.social-visual .s-icon svg {
+      width: 20px; height: 20px;
+    }
+    .asset-card .a-body {
+      padding: 8px 11px 10px;
+      display: flex; flex-direction: column; gap: 1px;
+      flex: 1;
+    }
+    .asset-card .a-role {
+      font-size: 8.5px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--blue);
+    }
+    .asset-card h4 {
+      font-size: 12.5px; font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .asset-card .a-url {
+      font-size: 10px; color: var(--mid);
+      word-break: break-all;
+    }
+    .asset-card .a-desc {
+      font-size: 10.5px; color: var(--mid);
+      margin-top: 2px; line-height: 1.35;
+    }
+    .asset-card .a-tags {
+      display: flex; gap: 4px; flex-wrap: wrap;
+      margin-top: auto; padding-top: 6px;
+    }
+
+    .pill {
+      display: inline-block; font-size: 9.5px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 3px 9px; border-radius: 999px;
+    }
+    .pill-live  { background: #D1FAE5; color: #047857; }
+    .pill-soon  { background: #FEF3C7; color: #B45309; }
+    .pill-blue  { background: #DBEAFE; color: #1D4ED8; }
+    .pill-purp  { background: #F3E8FF; color: #6B21A8; }
+
+    /* ─── ECOSYSTEM MAP ────────────────────────────────────── */
+    /* ─── ECOSYSTEM MAP (REDESIGNED) ─────────────────────── */
+    .eco-wrap {
+      flex: 1;
+      display: flex; flex-direction: column;
+      gap: 12px;
+      min-height: 0;
+    }
+    .eco-stage {
+      display: grid;
+      gap: 10px;
+    }
+    .eco-stage.acquire { grid-template-columns: repeat(3, 1fr); }
+    .eco-stage.convert { grid-template-columns: repeat(2, 1fr); max-width: 65%; margin: 0 auto; width: 100%; }
+    .eco-stage.dest    { grid-template-columns: 1fr; max-width: 48%; margin: 0 auto; width: 100%; }
+    .eco-cell {
+      background: rgba(37,99,235,0.08);
+      border: 1px solid rgba(37,99,235,0.25);
+      border-radius: 6px;
+      padding: 10px 14px;
+      text-align: center;
+      position: relative;
+    }
+    .eco-cell.hub  { background: rgba(37,99,235,0.16); border-color: var(--blue); }
+    .eco-cell.dest { background: var(--blue); border-color: var(--blue); padding: 12px; }
+    .eco-cell .l {
+      font-size: 9px; font-weight: 700; color: var(--blue);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      display: block; margin-bottom: 2px;
+    }
+    .eco-cell.dest .l { color: #fff; }
+    .eco-cell .n { font-size: 12.5px; font-weight: 600; color: #fff; }
+    .eco-cell.dest .n { font-size: 15px; }
+    .eco-cell .u {
+      font-size: 10px; color: var(--muted);
+      display: block; margin-top: 2px;
+      line-height: 1.3;
+    }
+    .eco-cell.dest .u { color: rgba(255,255,255,0.85); margin-top: 3px; }
+    .eco-cell .badge {
+      position: absolute; top: -7px; right: 8px;
+      font-size: 8px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 999px;
+      background: #fde68a; color: #92400e;
+    }
+    .eco-cell .badge.direct { background: #DBEAFE; color: #1D4ED8; }
+    .eco-bridge {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+      padding: 4px 4% 0;
+    }
+    .eco-bridge .b-arrow {
+      text-align: center;
+      font-size: 10px; color: var(--muted);
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+    }
+    .eco-bridge .b-arrow strong { color: #fff; display: block; font-size: 11px; margin-bottom: 1px; }
+    .eco-bridge .b-arrow .ar { font-size: 14px; color: var(--blue); display: inline-block; margin: 0 4px; }
+    .eco-bridge .b-split {
+      display: inline-flex; flex-direction: column; align-items: center;
+      gap: 1px;
+      font-size: 9px; font-weight: 700;
+      color: var(--blue); letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1px dashed rgba(37,99,235,0.4);
+      border-radius: 6px;
+      background: rgba(37,99,235,0.06);
+    }
+    .eco-bridge .b-split .sp { font-size: 8.5px; color: var(--muted); font-weight: 600; letter-spacing: 0.05em; text-transform: none; }
+    .eco-notes {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .eco-note {
+      border-left: 2px solid var(--blue);
+      padding: 2px 0 2px 12px;
+    }
+    .eco-note .pno {
+      font-size: 9px; font-weight: 700;
+      color: var(--blue); letter-spacing: 0.12em;
+      margin-bottom: 2px;
+    }
+    .eco-note h5 {
+      font-size: 12px; font-weight: 700; color: #fff;
+      margin-bottom: 2px;
+    }
+    .eco-note p {
+      font-size: 10.5px; color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ─── CONVERSION FUNNEL ────────────────────────────── */
+    .funnel-wrap {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) 1fr;
+      gap: 28px;
+      min-height: 0;
+    }
+    .funnel-shapes {
+      display: flex; flex-direction: column;
+      gap: 4px;
+      min-height: 0;
+    }
+    .f-shape {
+      display: flex;
+      align-items: center; justify-content: center;
+      color: #fff;
+      font-weight: 200;
+      font-size: 26px;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%);
+      margin: 0 auto;
+      flex: 1;
+      position: relative;
+    }
+    .f-shape .f-num {
+      font-weight: 200;
+      font-size: 22px;
+      opacity: 0.9;
+    }
+    .f-shape-1 { width: 100%; background: #1e3a8a; }
+    .f-shape-2 { width: 86%;  background: #1e40af; }
+    .f-shape-3 { width: 72%;  background: #2563eb; }
+    .f-shape-4 { width: 58%;  background: #3b82f6; }
+    .f-shape-5 { width: 44%;  background: #fbbf24; color: #422006; }
+    .funnel-details {
+      display: flex; flex-direction: column;
+      gap: 4px;
+      min-height: 0;
+    }
+    .f-detail {
+      display: grid;
+      grid-template-columns: 70px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 6px 0 6px 14px;
+      border-left: 3px solid var(--blue);
+      flex: 1;
+      min-height: 0;
+    }
+    .f-detail-5 { border-left-color: #fbbf24; }
+    .f-detail .fd-tag {
+      font-size: 9.5px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue);
+    }
+    .f-detail-5 .fd-tag { color: #B45309; }
+    .f-detail .fd-body h5 {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+    }
+    .f-detail .fd-body p {
+      font-size: 11px; color: var(--mid);
+      line-height: 1.4;
+    }
+    .f-detail .fd-earn {
+      font-size: 9.5px; font-weight: 700;
+      color: var(--blue);
+      background: rgba(37,99,235,0.08);
+      padding: 4px 9px; border-radius: 4px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      align-self: center;
+    }
+    .f-detail-5 .fd-earn { color: #B45309; background: rgba(251,191,36,0.14); }
+    .funnel-callout {
+      grid-column: 1 / -1;
+      padding: 12px 16px;
+      background: rgba(37,99,235,0.06);
+      border-left: 3px solid var(--blue);
+      border-radius: 4px;
+    }
+    .funnel-callout .fc-l {
+      font-size: 10px; font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .funnel-callout p {
+      font-size: 11.5px; color: var(--mid);
+      line-height: 1.5;
+    }
+
+    /* ─── LAYERS ───────────────────────────────────────────── */
+    .layers {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; flex: 1;
+    }
+    .layer-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px 26px;
+      display: flex; flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .layer-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--blue);
+    }
+    .layer-card .l-step {
+      font-size: 11px; font-weight: 700;
+      color: var(--blue); letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .layer-card h4 {
+      font-size: 24px; font-weight: 600;
+      letter-spacing: -0.015em; margin-bottom: 12px;
+    }
+    .layer-card p {
+      font-size: 13px; color: var(--mid);
+      line-height: 1.55;
+    }
+    .layer-card .l-tag {
+      margin-top: auto;
+      padding-top: 18px;
+      font-size: 11px; font-weight: 700;
+      color: var(--blue); letter-spacing: 0.06em;
+    }
+
+    /* ─── REVENUE TABLE ────────────────────────────────────── */
+    .table-wrap {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 6px; overflow: hidden;
+      flex: 1;
+      display: flex; flex-direction: column;
+    }
+    table.rev {
+      width: 100%; border-collapse: collapse;
+      font-size: 14px;
+    }
+    table.rev th {
+      text-align: left; font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--muted); padding: 14px 22px;
+      background: rgba(0,0,0,0.02);
+      border-bottom: 1px solid var(--border);
+    }
+    table.rev td {
+      padding: 14px 22px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    table.rev tr:last-child td { border-bottom: none; }
+    table.rev .strong { font-weight: 700; color: var(--dark); }
+    table.rev .accent { color: var(--blue); font-weight: 700; }
+    table.rev .num-r { text-align: right; }
+
+    /* ─── SCORECARD ────────────────────────────────────────── */
+    .score-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; flex: 1;
+    }
+    .score-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px; padding: 26px 24px;
+      display: flex; flex-direction: column;
+    }
+    .score-card .s-no {
+      font-size: 11px; font-weight: 700;
+      color: var(--blue); letter-spacing: 0.14em;
+      margin-bottom: 12px;
+    }
+    .score-card h4 {
+      font-size: 19px; font-weight: 600;
+      color: #fff; letter-spacing: -0.01em;
+      margin-bottom: 14px;
+    }
+    .score-card ul {
+      list-style: none; padding: 0; margin-top: auto;
+    }
+    .score-card ul li {
+      font-size: 12.5px; color: var(--muted);
+      padding: 4px 0;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .score-card ul li::before {
+      content: ''; width: 4px; height: 4px;
+      background: var(--blue); border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ─── ASK SLIDE ────────────────────────────────────────── */
+    .ask-wrap {
+      flex: 1; display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: center;
+    }
+    .ask-num { display: flex; flex-direction: column; }
+    .ask-num .ask-l {
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      color: var(--blue); margin-bottom: 12px;
+    }
+    .ask-num .ask-big {
+      font-size: clamp(80px, 12vw, 180px);
+      font-weight: 200; color: #fff;
+      letter-spacing: -0.04em; line-height: 1;
+    }
+    .ask-num .ask-big .currency {
+      font-size: 0.4em; font-weight: 400; color: var(--muted);
+      vertical-align: top; padding-right: 8px;
+    }
+    .ask-num .ask-unit {
+      font-size: 16px; color: var(--muted); margin-top: 16px;
+    }
+    .ask-copy h3 {
+      font-size: 28px; font-weight: 500;
+      color: #fff; letter-spacing: -0.015em;
+      line-height: 1.2; margin-bottom: 16px;
+    }
+    .ask-copy p {
+      font-size: 15px; color: var(--muted);
+      line-height: 1.6; margin-bottom: 14px;
+    }
+    .ask-copy strong { color: #fff; font-weight: 600; }
+
+    /* ─── BUDGET TABLE ─────────────────────────────────────── */
+    .budget-wrap { flex: 1; display: flex; flex-direction: column; }
+    table.budget {
+      width: 100%; border-collapse: collapse;
+      font-size: 14px; background: var(--bg-2);
+      border: 1px solid var(--border); border-radius: 6px;
+      overflow: hidden;
+    }
+    table.budget th {
+      text-align: left; font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--muted); padding: 14px 20px;
+      background: rgba(0,0,0,0.025);
+      border-bottom: 1px solid var(--border);
+    }
+    table.budget th.r { text-align: right; }
+    table.budget td {
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    table.budget td.r { text-align: right; font-weight: 700; color: var(--blue); }
+    table.budget td.bucket { font-weight: 700; color: var(--dark); }
+    table.budget td.what { font-size: 12.5px; color: var(--mid); }
+    table.budget tr.total td {
+      background: rgba(37,99,235,0.06);
+      border-top: 2px solid var(--blue);
+      border-bottom: none;
+      font-weight: 700; color: var(--dark);
+      padding-top: 16px; padding-bottom: 16px;
+    }
+    table.budget tr.total td.r {
+      font-size: 17px; color: var(--blue);
+    }
+
+    /* ─── JUSTIFY CARDS ────────────────────────────────────── */
+    .just-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; flex: 1; min-height: 0;
+    }
+    .just-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      display: flex; flex-direction: column;
+    }
+    .just-card .j-tag {
+      display: inline-block;
+      font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      padding: 2px 8px; border-radius: 999px;
+      align-self: flex-start; margin-bottom: 8px;
+    }
+    .just-card h4 {
+      font-size: 14px; font-weight: 700;
+      letter-spacing: -0.01em; margin-bottom: 8px;
+    }
+    .just-card .j-row {
+      font-size: 11px; color: var(--mid);
+      line-height: 1.45; margin-bottom: 5px;
+    }
+    .just-card .j-row strong {
+      color: var(--dark); font-weight: 700;
+    }
+
+    .math-callout {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: var(--bg-alt);
+      border-left: 3px solid var(--blue);
+      border-radius: 4px;
+    }
+    .math-callout .m-l {
+      font-size: 10px; font-weight: 700;
+      color: var(--blue); letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 4px;
+    }
+    .math-callout p {
+      font-size: 12px; color: var(--dark); line-height: 1.5;
+    }
+
+    /* ─── CLOSING ──────────────────────────────────────────── */
+    .closing {
+      justify-content: center; align-items: center;
+      text-align: center;
+      padding: 80px;
+    }
+    .closing h1 {
+      font-size: clamp(56px, 8vw, 120px);
+      font-weight: 200; line-height: 0.95;
+      letter-spacing: -0.045em; color: #fff;
+      margin-bottom: 28px;
+    }
+    .closing h1 .accent { color: var(--blue); }
+    .closing p {
+      font-size: clamp(16px, 1.6vw, 20px);
+      color: var(--muted); max-width: 600px;
+      margin: 0 auto 40px; line-height: 1.55;
+    }
+    .closing .next {
+      display: flex; gap: 12px; justify-content: center;
+      flex-wrap: wrap;
+    }
+    .closing .next .nx {
+      padding: 10px 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      font-size: 12px; font-weight: 600;
+      color: #fff; letter-spacing: 0.04em;
+    }
+
+    /* ─── PROOF SLIDE (GLIMSY) ─────────────────────────────── */
+    .proof-wrap {
+      display: grid;
+      grid-template-columns: 0.85fr 1fr;
+      gap: 56px;
+      align-items: stretch;
+      flex: 1;
+    }
+    .proof-visual {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 16px;
+      padding: 12px 0;
+      position: relative;
+      min-height: 420px;
+    }
+    .phone-frame {
+      flex: 0 1 160px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
+      overflow: hidden;
+      border: 2px solid #e5e5e5;
+      transition: transform 0.25s ease;
+    }
+    .phone-frame.phone-hero {
+      flex: 0 1 180px;
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(37,99,235,0.14), 0 2px 8px rgba(0,0,0,0.08);
+      border-color: var(--blue);
+    }
+    .phone-frame img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top center;
+    }
+    .phone-label {
+      text-align: center;
+      padding: 8px 6px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      background: #fafafa;
+      border-top: 1px solid #f0f0f0;
+    }
+    .phone-frame.phone-hero .phone-label {
+      color: var(--blue);
+      background: rgba(37,99,235,0.04);
+      border-top-color: rgba(37,99,235,0.1);
+    }
+    /* ─── TEMPLATE COLLAGE ─────────────────────────────── */
+    .tmpl-collage {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      flex: 1;
+      padding: 12px 0;
+    }
+    .tmpl-stack {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      aspect-ratio: 4 / 3;
+    }
+    .tmpl-card {
+      position: absolute;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.05);
+      border: 2px solid #e8e8e8;
+    }
+    .tmpl-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .tmpl-card:nth-child(1) {
+      width: 56%; top: 10%; left: 0;
+      transform: rotate(-3.5deg);
+      z-index: 1;
+    }
+    .tmpl-card:nth-child(2) {
+      width: 60%; top: 2%; left: 20%;
+      transform: rotate(0deg);
+      z-index: 3;
+      border-color: var(--blue);
+      box-shadow: 0 10px 36px rgba(37,99,235,0.14), 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .tmpl-card:nth-child(3) {
+      width: 56%; top: 10%; right: 0;
+      transform: rotate(3.5deg);
+      z-index: 2;
+    }
+    .tmpl-tag {
+      position: absolute;
+      bottom: -4px;
+      left: 50%; transform: translateX(-50%);
+      background: var(--blue);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    }
+
+    .proof-body {
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+    }
+    .proof-what {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 460px;
+    }
+    .proof-what strong { color: var(--dark); font-weight: 700; }
+    .proof-stats {
+      display: flex; flex-direction: column;
+      gap: 0;
+    }
+    .proof-stat-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      align-items: baseline; gap: 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .proof-stat-row:last-child { border-bottom: none; }
+    .proof-stat-row .ps-num {
+      font-size: clamp(36px, 4.2vw, 56px);
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .proof-stat-row .ps-num.muted { color: var(--dark); }
+    .proof-stat-row .ps-lbl {
+      font-size: 13.5px;
+      color: var(--mid);
+      line-height: 1.45;
+    }
+    .proof-stat-row .ps-lbl strong {
+      display: block;
+      color: var(--dark);
+      font-weight: 700;
+      margin-bottom: 2px;
+      font-size: 14.5px;
+    }
+    .proof-meta {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .proof-meta .pm {
+      font-size: 10px; font-weight: 700;
+      color: var(--blue); letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border: 1px solid rgba(37,99,235,0.3);
+      border-radius: 999px;
+      background: rgba(37,99,235,0.04);
+    }
+
+    /* ─── DECK CONTROLS ────────────────────────────────────── */
+    .controls {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex; align-items: center; gap: 16px;
+      background: rgba(15, 17, 21, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      padding: 8px 16px;
+    }
+    .controls button {
+      background: none; border: none; cursor: pointer;
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      transition: background 0.2s, color 0.2s;
+    }
+    .controls button:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+    .controls button svg { width: 14px; height: 14px; }
+    .controls .counter {
+      font-size: 12px; font-weight: 600;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+      min-width: 50px; text-align: center;
+    }
+    .controls .counter .of {
+      color: rgba(255,255,255,0.4); margin: 0 4px;
+    }
+
+    /* progress */
+    .progress {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 2px; background: rgba(255,255,255,0.05);
+      z-index: 50;
+    }
+    .progress .bar {
+      height: 100%; background: var(--blue);
+      transition: width 0.4s ease;
+    }
+
+    /* slide number indicator */
+    .slide-no {
+      position: absolute;
+      top: 64px; right: 80px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+    .slide-light .slide-no, .slide-white .slide-no, .slide-alt .slide-no { color: var(--mid); }
+    .feature-slide .slide-no { top: 56px; right: 72px; }
+
+    /* responsiveness */
+    @media (max-width: 1100px) {
+      .slide { padding: 48px 56px 72px; }
+      .feature-slide { padding: 48px 56px 80px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .assets-grid { grid-template-columns: repeat(2, 1fr); }
+      .layers, .score-grid { grid-template-columns: repeat(2, 1fr); }
+      .tl-grid { grid-template-columns: repeat(2, 1fr); }
+      .ask-wrap, .proof-wrap, .feature-grid, .funnel-wrap { grid-template-columns: 1fr; gap: 24px; }
+      .eco-stage.acquire { grid-template-columns: 1fr; }
+      .eco-stage.convert, .eco-stage.dest { max-width: 100%; }
+      .eco-bridge { grid-template-columns: 1fr; }
+      .eco-notes { grid-template-columns: 1fr; }
+      .feature-visual { min-height: 240px; }
+      .proof-stat-row { grid-template-columns: 160px 1fr; }
+      .just-grid { grid-template-columns: repeat(2, 1fr); }
+      .funnel-wrap { grid-template-columns: 1fr; }
+      .f-detail { grid-template-columns: 70px 1fr; }
+      .f-detail .fd-earn { display: none; }
+      .grid-3-3 { grid-template-columns: repeat(3, 1fr); grid-template-rows: auto; }
+    }
+    @media (max-width: 720px) {
+      .slide, .feature-slide { padding: 32px 24px 80px; }
+      .slide-no, .feature-slide .slide-no { right: 24px; top: 32px; }
+      .stats-grid, .assets-grid, .layers,
+      .score-grid, .tl-grid, .grid-3, .grid-3-3, .grid-5 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress"><div class="bar" id="progressBar" style="width: 0%"></div></div>
+
+  <!-- DECK -->
+  <div class="deck" id="deck">
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 01 · COVER                                         -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-dark cover active">
+      <div class="cover-top">
+        <div class="cover-mark">Nexova</div>
+        <div class="cover-meta">Presentation · May 2026</div>
+      </div>
+
+      <div class="cover-mid">
+        <div>
+          <div class="eyebrow" style="margin-bottom: 24px;">Platform Upgrades &amp; Ecosystem</div>
+          <h1>17 weeks.<br>One operating <span class="accent">system</span><br>for Lean.x.</h1>
+        </div>
+        <p class="cover-sub">A complete merchant acquisition platform &mdash; built, live, and reporting-ready. Here's what we shipped, what we own, and how it pays back.</p>
+      </div>
+
+      <div class="cover-bottom">
+        <div class="cover-pair">
+          <span class="l">Build window</span>
+          <span class="v">09 Jan &mdash; 13 May 2026</span>
+        </div>
+        <div class="cover-pair">
+          <span class="l">Status</span>
+          <span class="v">Production · Live</span>
+        </div>
+        <div class="cover-pair">
+          <span class="l">Prepared for</span>
+          <span class="v">Lean.x &mdash; Founder Review</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 02 · BY THE NUMBERS                                -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-dark">
+      <div class="slide-no">02</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> The Headline</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">17 weeks delivered</div>
+        <h2 class="headline">A complete platform, <span class="accent">measured in shipped work</span>.</h2>
+        <p class="lede" style="margin-bottom: 40px;">Every number below is live in production today &mdash; not a roadmap, not a plan.</p>
+      </div>
+
+      <div class="body">
+        <div class="stats-grid">
+          <div class="stat"><div class="num">50+</div><div class="lbl">Phases shipped</div></div>
+          <div class="stat"><div class="num">17</div><div class="lbl">Builder elements</div></div>
+          <div class="stat"><div class="num">25+</div><div class="lbl">Templates</div></div>
+          <div class="stat"><div class="num">24+</div><div class="lbl">API routes</div></div>
+          <div class="stat"><div class="num">6</div><div class="lbl">Ecosystem assets</div></div>
+          <div class="stat"><div class="num">5</div><div class="lbl">Trackers wired</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 03 · PART 1 DIVIDER                                -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-dark divider-slide">
+      <div class="slide-no">03</div>
+      <div class="part-no">— Part One</div>
+      <h2>What we<br>built.</h2>
+      <p>Nine production subsystems that turn a blank Nexova account into a working online business with Lean.x at checkout.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 04 · 9 SUBSYSTEMS OVERVIEW                         -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-light">
+      <div class="slide-no">04</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 01 · Capability Upgrades</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Ten subsystems</div>
+        <h2 class="headline">Everything a merchant needs, <span class="accent">in one place</span>.</h2>
+        <p class="lede" style="margin-bottom: 8px;">A roadmap of what's next &mdash; each one gets its own page.</p>
+      </div>
+
+      <div class="body" style="margin-top: 32px;">
+        <div class="grid-3-3">
+          <div class="ft-card"><div class="ft-num">01</div><h4>Visual Builder</h4><p>Drag-and-drop canvas. 17 elements, multi-page sites, AI Chat, auto-save.</p></div>
+          <div class="ft-card"><div class="ft-num">02</div><h4>Template Library</h4><p>25+ ready-made designs for Malaysian niches, with Lean.x checkout wired in.</p></div>
+          <div class="ft-card"><div class="ft-num">03</div><h4>Publishing &amp; Domains</h4><p>Free subdomain or custom domain via Vercel, with automatic SSL.</p></div>
+          <div class="ft-card"><div class="ft-num">04</div><h4>Native Lean.x Payments</h4><p>FPX, e-wallets, Silent Bill, bump offers, subscription billing.</p></div>
+          <div class="ft-card"><div class="ft-num">05</div><h4>Commerce Stack</h4><p>Product variants, digital goods, EasyParcel shipping, COD, order history.</p></div>
+          <div class="ft-card"><div class="ft-num">06</div><h4>Forms &amp; Bookings</h4><p>Lead forms, calendar bookings, paid bookings, hybrid booking + payment.</p></div>
+          <div class="ft-card"><div class="ft-num">07</div><h4>Analytics &amp; Tracking</h4><p>Meta Pixel + CAPI, TikTok, GA4, GTM, in-app dashboard.</p></div>
+          <div class="ft-card"><div class="ft-num">08</div><h4>AI Studio</h4><p>AI image and video ad generation, with tokens billed through Lean.x.</p></div>
+          <div class="ft-card"><div class="ft-num">09</div><h4>Admin &amp; Growth</h4><p>Coupons, Premium gating, guided onboarding, Nexova Academy.</p></div>
+          <div class="ft-card"><div class="ft-num">10</div><h4>Template Marketplace</h4><p>Premium paid templates &mdash; merchants pay via Lean.x to unlock professional designs.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 05 · VISUAL BUILDER                                -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-white feature-slide">
+      <div class="slide-no">05</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 01 · Visual Builder</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-meta">
+          <span class="feature-step">— Subsystem 01</span>
+          <h3 class="headline">Build pages without writing a line of code.</h3>
+          <p class="feature-desc">A drag-and-drop canvas with everything a merchant needs to ship a real site fast.</p>
+          <ul class="feature-points">
+            <li><strong>17 building blocks</strong> &mdash; hero, sections, forms, products, more</li>
+            <li><strong>Multi-page sites</strong> with a clean navigation model</li>
+            <li><strong>AI Chat</strong> for plain-English edits and fixes</li>
+            <li><strong>Auto-save</strong> on every change</li>
+          </ul>
+          <a class="feature-link" href="https://staging.nexova.my/builder" target="_blank" rel="noopener">Open in Nexova <span class="arr">→</span></a>
+        </div>
+        <div class="feature-visual">
+          <img src="Assets/Drag%20And%20Drop%20Builder.jpeg" alt="Nexova Visual Builder" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 06 · TEMPLATE LIBRARY                              -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-white feature-slide">
+      <div class="slide-no">06</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 02 · Template Library</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-meta">
+          <span class="feature-step">— Subsystem 02</span>
+          <h3 class="headline">Start halfway there.</h3>
+          <p class="feature-desc">Ready-made designs built for Malaysian merchants &mdash; pick one, customise, publish.</p>
+          <ul class="feature-points">
+            <li><strong>25+ templates</strong> across F&amp;B, fashion, services, more</li>
+            <li><strong>Lean.x checkout</strong> already wired into every template</li>
+            <li>Editable end-to-end inside the Builder</li>
+            <li>Niche-specific copy and layouts</li>
+          </ul>
+          <a class="feature-link" href="https://staging.nexova.my/templates" target="_blank" rel="noopener">Open in Nexova <span class="arr">→</span></a>
+        </div>
+        <div class="feature-visual">
+          <img src="Assets/Templates.jpeg" alt="Nexova Template Library" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 07 · PUBLISHING & DOMAINS                          -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-white feature-slide">
+      <div class="slide-no">07</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 03 · Publishing &amp; Domains</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-meta">
+          <span class="feature-step">— Subsystem 03</span>
+          <h3 class="headline">Live on the internet in minutes.</h3>
+          <p class="feature-desc">Free subdomain to start, custom domain when ready &mdash; SSL handled automatically.</p>
+          <ul class="feature-points">
+            <li>Free <strong>*.nexova.my</strong> subdomain on every account</li>
+            <li>Custom domain support via Vercel</li>
+            <li>Automatic SSL certificate provisioning</li>
+            <li>One-click publish from the Builder</li>
+          </ul>
+          <a class="feature-link" href="https://staging.nexova.my/dashboard/settings/subdomain" target="_blank" rel="noopener">Open in Nexova <span class="arr">→</span></a>
+        </div>
+        <div class="feature-visual">
+          <img src="Assets/Own%20Domain%20%26%20URL.jpeg" alt="Nexova Domain Settings" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 08 · NATIVE LEAN.X PAYMENTS                        -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-white feature-slide">
+      <div class="slide-no">08</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 04 · Native Lean.x Payments</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-meta">
+          <span class="feature-step">— Subsystem 04</span>
+          <h3 class="headline">Lean.x at every cash moment.</h3>
+          <p class="feature-desc">Checkout built directly into every page &mdash; no plugins, no redirects, no friction.</p>
+          <ul class="feature-points">
+            <li><strong>FPX</strong> bank transfers and <strong>e-wallets</strong></li>
+            <li><strong>Silent Bill</strong> for instant confirmation</li>
+            <li>Bump offers and order upsells</li>
+            <li>Subscription billing for Premium plans</li>
+          </ul>
+          <a class="feature-link" href="https://staging.nexova.my/dashboard/integrations" target="_blank" rel="noopener">Open in Nexova <span class="arr">→</span></a>
+        </div>
+        <div class="feature-visual">
+          <img src="Assets/Checkout%20Page.jpeg" alt="Lean.x checkout page" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 09 · COMMERCE STACK                                -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-white feature-slide">
+      <div class="slide-no">09</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 05 · Commerce Stack</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-meta">
+          <span class="feature-step">— Subsystem 05</span>
+          <h3 class="headline">From inventory to delivery.</h3>
+          <p class="feature-desc">Everything a merchant needs to run a real online store, not just a landing page.</p>
+          <ul class="feature-points">
+            <li>Product <strong>variants</strong> and digital goods</li>
+            <li><strong>EasyParcel</strong> shipping integration</li>
+            <li>Cash on Delivery support</li>
+            <li>Full order &amp; transaction history</li>
+          </ul>
+          <a class="feature-link" href="https://staging.nexova.my/dashboard/settings/shipping" target="_blank" rel="noopener">Open in Nexova <span class="arr">→</span></a>
+        </div>
+        <div class="feature-visual">
+          <img src="Assets/Shipping%20Page.jpeg" alt="Nexova Shipping Settings" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 10 · FORMS & BOOKINGS                              -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-white feature-slide">
+      <div class="slide-no">10</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 06 · Forms &amp; Bookings</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-meta">
+          <span class="feature-step">— Subsystem 06</span>
+          <h3 class="headline">Leads, bookings, paid bookings.</h3>
+          <p class="feature-desc">For service businesses &mdash; capture leads, schedule appointments, take deposits in one flow.</p>
+          <ul class="feature-points">
+            <li>Lead capture forms with Google Sheets sync</li>
+            <li>Calendar bookings with availability rules</li>
+            <li><strong>Paid bookings</strong> &mdash; book + pay in one step</li>
+            <li>Hybrid booking + Lean.x checkout</li>
+          </ul>
+          <a class="feature-link" href="https://staging.nexova.my/dashboard/bookings" target="_blank" rel="noopener">Open in Nexova <span class="arr">→</span></a>
+        </div>
+        <div class="feature-visual">
+          <img src="Assets/Booking%20Page.jpeg" alt="Nexova Bookings" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 11 · ANALYTICS & TRACKING                          -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-white feature-slide">
+      <div class="slide-no">11</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 07 · Analytics &amp; Tracking</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-meta">
+          <span class="feature-step">— Subsystem 07</span>
+          <h3 class="headline">Prove the ad spend works.</h3>
+          <p class="feature-desc">Every major tracker, wired and ready &mdash; so merchants keep spending with confidence.</p>
+          <ul class="feature-points">
+            <li><strong>Meta Pixel + Conversions API</strong> (CAPI)</li>
+            <li>TikTok pixel tracking</li>
+            <li>Google Analytics 4 &amp; GTM</li>
+            <li>In-app analytics dashboard</li>
+          </ul>
+          <a class="feature-link" href="https://staging.nexova.my/dashboard/integrations" target="_blank" rel="noopener">Open in Nexova <span class="arr">→</span></a>
+        </div>
+        <div class="feature-visual">
+          <img src="Assets/Analytic%20Setup%20Page.jpeg" alt="Nexova Analytics" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 12 · AI STUDIO                                     -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-white feature-slide">
+      <div class="slide-no">12</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 08 · AI Studio</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-meta">
+          <span class="feature-step">— Subsystem 08</span>
+          <h3 class="headline">Ads without a designer.</h3>
+          <p class="feature-desc">Generate image and video ad creative inside the platform &mdash; tokens billed through Lean.x.</p>
+          <ul class="feature-points">
+            <li>AI <strong>image</strong> ad generation</li>
+            <li>AI <strong>video</strong> ad generation</li>
+            <li>Token-based pricing, paid via Lean.x</li>
+            <li>Export-ready for ad platforms</li>
+          </ul>
+          <a class="feature-link" href="https://staging.nexova.my/dashboard/ai-studio" target="_blank" rel="noopener">Open in Nexova <span class="arr">→</span></a>
+        </div>
+        <div class="feature-visual">
+          <img src="Assets/AI%20Studio.jpeg" alt="Nexova AI Studio" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 13 · ADMIN & GROWTH                                -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-white feature-slide">
+      <div class="slide-no">13</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 09 · Admin &amp; Growth</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-meta">
+          <span class="feature-step">— Subsystem 09</span>
+          <h3 class="headline">Onboarding, support, viral loops.</h3>
+          <p class="feature-desc">The growth and operator layer that runs behind every Nexova merchant.</p>
+          <ul class="feature-points">
+            <li>Coupon codes &amp; Premium gating</li>
+            <li>Guided onboarding flow</li>
+            <li><strong>Nexova Academy</strong> &mdash; video learning</li>
+          </ul>
+          <a class="feature-link" href="https://staging.nexova.my/academy" target="_blank" rel="noopener">Open in Nexova <span class="arr">→</span></a>
+        </div>
+        <div class="feature-visual">
+          <img src="Assets/Academy%20Page.jpeg" alt="Nexova Academy" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 14 · TEMPLATE MARKETPLACE                           -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-white feature-slide">
+      <div class="slide-no">14</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 10 · Template Marketplace</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div class="feature-grid" style="grid-template-columns: 1fr 1.2fr;">
+        <div class="feature-meta">
+          <span class="feature-step">— Subsystem 10</span>
+          <h3 class="headline">Templates that <span class="accent">pay for themselves</span>.</h3>
+          <p class="feature-desc">Professional, industry-specific website templates merchants can purchase directly through Lean.x &mdash; turning design into a revenue line.</p>
+          <ul class="feature-points">
+            <li><strong>Pay-to-use</strong> premium templates</li>
+            <li>Industry-specific designs &mdash; healthcare, e-commerce, real estate &amp; more</li>
+            <li>Every purchase processed via <strong>Lean.x</strong></li>
+            <li>Instant deploy after purchase</li>
+          </ul>
+          <a class="feature-link" href="https://staging.nexova.my/marketplace" target="_blank" rel="noopener">Open Marketplace <span class="arr">→</span></a>
+        </div>
+        <div class="tmpl-collage">
+          <div class="tmpl-stack">
+            <div class="tmpl-card"><img src="Assets/WhatsApp%20Image%202026-05-19%20at%209.00.04%20PM%20(2).jpeg" alt="E-commerce Template" loading="lazy"></div>
+            <div class="tmpl-card"><img src="Assets/WhatsApp%20Image%202026-05-19%20at%209.00.04%20PM.jpeg" alt="Real Estate Template" loading="lazy"></div>
+            <div class="tmpl-card"><img src="Assets/WhatsApp%20Image%202026-05-19%20at%209.00.04%20PM%20(1).jpeg" alt="Blog Template" loading="lazy"></div>
+            <div class="tmpl-tag">Paid via Lean.x</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 15 · BUILD TIMELINE                                -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-dark">
+      <div class="slide-no">15</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 02 · Build Timeline</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">50+ phases, four months</div>
+        <h2 class="headline">Shipped in <span class="accent">four clear phases</span>.</h2>
+      </div>
+
+      <div class="body" style="margin-top: 32px;">
+        <div class="tl-grid">
+          <div class="tl-col">
+            <span class="tl-month">January</span>
+            <h4>Foundation &amp; Payments</h4>
+            <ul class="tl-items">
+              <li><span class="when">Jan 09 – 14</span><span class="what">Bootstrap + Lean.x live</span></li>
+              <li><span class="when">Jan 16 – 18</span><span class="what">Forms, Sheets, Subdomain</span></li>
+              <li><span class="when">Jan 19 – 22</span><span class="what">Custom Domains + Bump Offers</span></li>
+              <li><span class="when">Jan 25 – 28</span><span class="what">Bulk Upload + Meta CAPI</span></li>
+              <li><span class="when">Jan 30 – 31</span><span class="what">Templates + Premium Marketplace</span></li>
+            </ul>
+          </div>
+          <div class="tl-col">
+            <span class="tl-month">Feb – Mar</span>
+            <h4>Marketing, Auth, Academy</h4>
+            <ul class="tl-items">
+              <li><span class="when">Feb 02 – 03</span><span class="what">Pricing + Subscription Checkout</span></li>
+              <li><span class="when">Feb 04</span><span class="what">Walkthrough + GTM</span></li>
+              <li><span class="when">Feb 19 – 28</span><span class="what">Templates + Variant Generation</span></li>
+              <li><span class="when">Mar 01</span><span class="what">Lean.x Logos + Split Login</span></li>
+              <li><span class="when">Mar 03 – 13</span><span class="what">Onboarding + Academy</span></li>
+            </ul>
+          </div>
+          <div class="tl-col">
+            <span class="tl-month">April</span>
+            <h4>Commerce, AI, Multi-page</h4>
+            <ul class="tl-items">
+              <li><span class="when">Apr 07</span><span class="what">Digital Products + Hybrid Booking</span></li>
+              <li><span class="when">Apr 12 – 13</span><span class="what">EasyParcel Integration</span></li>
+              <li><span class="when">Apr 14</span><span class="what">SEO Satellites Live</span></li>
+              <li><span class="when">Apr 22 – 23</span><span class="what">Security Pass + AI Studio</span></li>
+              <li><span class="when">Apr 29 – 30</span><span class="what">Video Ads + Multi-page</span></li>
+            </ul>
+          </div>
+          <div class="tl-col">
+            <span class="tl-month">May</span>
+            <h4>Storefronts &amp; Tracking</h4>
+            <ul class="tl-items">
+              <li><span class="when">May 01</span><span class="what">Glimsy V2 Storefront</span></li>
+              <li><span class="when">May 02 – 03</span><span class="what">COD + Wallet API</span></li>
+              <li><span class="when">May 06 – 08</span><span class="what">WhatsApp Recovery</span></li>
+              <li><span class="when">May 12</span><span class="what">Pixel + CAPI End-to-End</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 16 · LIVE PROOF — GLIMSY                          -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-light">
+      <div class="slide-no">16</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> Live Proof</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Templates aren't theory</div>
+        <h2 class="headline">Glimsy. 2 days live. <span class="accent">RM 627 in Lean.x sales.</span></h2>
+        <p class="lede">One KOL. Zero ringgit on ads. The template did the rest.</p>
+      </div>
+
+      <div class="body" style="margin-top: 32px;">
+        <div class="proof-wrap">
+
+          <div class="proof-visual">
+            <div class="phone-frame">
+              <img src="Assets/WhatsApp%20Image%202026-05-19%20at%203.02.33%20PM%20(1).jpeg" alt="Glimsy — Product Catalog">
+              <div class="phone-label">Browse</div>
+            </div>
+            <div class="phone-frame phone-hero">
+              <img src="Assets/WhatsApp%20Image%202026-05-19%20at%203.02.33%20PM.jpeg" alt="Glimsy — Product Detail">
+              <div class="phone-label">Product</div>
+            </div>
+            <div class="phone-frame">
+              <img src="Assets/WhatsApp%20Image%202026-05-19%20at%203.02.32%20PM.jpeg" alt="Glimsy — Cart & Checkout">
+              <div class="phone-label">Checkout</div>
+            </div>
+          </div>
+
+          <div class="proof-body">
+            <div>
+              <p class="proof-what">
+                <strong>Glimsy</strong> is a Nexova template built for influencers and fashion sellers &mdash; pre-loved items, own products, or curated picks, all on one landing page with Lean.x checkout wired in.
+              </p>
+
+              <div class="proof-stats">
+                <div class="proof-stat-row">
+                  <div class="ps-num">RM 627</div>
+                  <div class="ps-lbl"><strong>Sales in 48 hours</strong>Processed through Lean.x checkout</div>
+                </div>
+                <div class="proof-stat-row">
+                  <div class="ps-num">RM 0</div>
+                  <div class="ps-lbl"><strong>Marketing spend</strong>No ads, no boosts, no paid promotion</div>
+                </div>
+                <div class="proof-stat-row">
+                  <div class="ps-num muted">1 &middot; 3</div>
+                  <div class="ps-lbl"><strong>1 KOL &middot; 3 purchases</strong>One creator's organic post drove every sale</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="proof-meta">
+              <span class="pm">Live · 17 May 2026</span>
+              <span class="pm">Built on Nexova</span>
+              <span class="pm">Paid via Lean.x</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 17 · PART 2 DIVIDER                                -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-dark divider-slide">
+      <div class="slide-no">17</div>
+      <div class="part-no">— Part Two</div>
+      <h2>The<br>ecosystem.</h2>
+      <p>Six properties that feed Lean.x &mdash; two SEO satellites, Lean.x social media, the core builder, the agency arm, and Lean.x itself at the centre.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 18 · FIVE ASSETS                                   -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-light">
+      <div class="slide-no">18</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 03 · The Six Assets</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow" style="margin-bottom: 8px;">Six properties</div>
+        <h2 class="headline" style="font-size: clamp(28px, 3.4vw, 42px); margin-bottom: 0;">Each one with <span class="accent">one job</span>.</h2>
+      </div>
+
+      <div class="body" style="margin-top: 14px;">
+        <div class="assets-grid">
+
+          <a class="asset-card" href="https://leanx.io/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+            <div class="a-visual"><img src="Assets/Leanx.io.jpeg" alt="Lean.x homepage" loading="lazy"></div>
+            <div class="a-body">
+              <span class="a-role">Destination</span>
+              <h4>Lean.x</h4>
+              <span class="a-url">leanx.io</span>
+              <p class="a-desc">Payment gateway. End destination of every funnel.</p>
+              <div class="a-tags">
+                <span class="pill pill-live">Live</span>
+                <span class="pill pill-blue">Partner</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="asset-card" href="https://googleadsagency-my.vercel.app/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+            <div class="a-visual"><img src="Assets/Googleadsagency.jpeg" alt="Google Ads Hub" loading="lazy"></div>
+            <div class="a-body">
+              <span class="a-role">SEO Satellite</span>
+              <h4>Google Ads Hub</h4>
+              <span class="a-url">googleadsagency.my</span>
+              <p class="a-desc">PPC research traffic. Recommends Nexova + Lean.x.</p>
+              <div class="a-tags">
+                <span class="pill pill-live">Live</span>
+                <span class="pill pill-soon">Owned</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="asset-card" href="https://facebookads-my.vercel.app/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+            <div class="a-visual"><img src="Assets/METAadsagency.jpeg" alt="META Ads Hub" loading="lazy"></div>
+            <div class="a-body">
+              <span class="a-role">SEO Satellite</span>
+              <h4>META Ads Hub</h4>
+              <span class="a-url">facebookads.my</span>
+              <p class="a-desc">Social ads research traffic. Funnels SMBs to Nexova.</p>
+              <div class="a-tags">
+                <span class="pill pill-live">Live</span>
+                <span class="pill pill-soon">Owned</span>
+              </div>
+            </div>
+          </a>
+
+          <div class="asset-card">
+            <div class="a-visual placeholder social-visual">
+              <div class="s-icon" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
+              <div class="s-icon" title="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.34a8.16 8.16 0 0 0 4.77 1.52V6.43a4.85 4.85 0 0 1-1.84-.27z"/></svg></div>
+              <div class="s-icon" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></div>
+              <div class="s-icon" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.34 17.34H5.67V9.66h2.67v7.68zM7 8.5a1.55 1.55 0 1 1 0-3.1 1.55 1.55 0 0 1 0 3.1zm11.34 8.84h-2.67v-3.74c0-.89-.02-2.04-1.24-2.04-1.25 0-1.44.97-1.44 1.97v3.81H10.32V9.66h2.56v1.05h.04c.36-.68 1.23-1.4 2.53-1.4 2.71 0 3.21 1.78 3.21 4.1v3.93z"/></svg></div>
+            </div>
+            <div class="a-body">
+              <span class="a-role">Social Acquisition</span>
+              <h4>Lean.x Social Media</h4>
+              <span class="a-url">IG · TikTok · FB · LinkedIn</span>
+              <p class="a-desc">Direct traffic to leanx.io. Awareness &amp; merchant acquisition via social.</p>
+              <div class="a-tags">
+                <span class="pill pill-live">Live</span>
+                <span class="pill pill-blue">Direct</span>
+              </div>
+            </div>
+          </div>
+
+          <a class="asset-card" href="https://staging.nexova.my/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">
+            <div class="a-visual"><img src="Assets/Nexova%20Page%20Builder.jpeg" alt="Nexova Page Builder" loading="lazy"></div>
+            <div class="a-body">
+              <span class="a-role">Core Product</span>
+              <h4>Nexova Builder</h4>
+              <span class="a-url">nexova.my</span>
+              <p class="a-desc">No-code builder. Where merchants are converted.</p>
+              <div class="a-tags">
+                <span class="pill pill-live">Live</span>
+                <span class="pill pill-purp">Upgraded</span>
+              </div>
+            </div>
+          </a>
+
+          <div class="asset-card">
+            <div class="a-visual placeholder">Nexova Digital — soon</div>
+            <div class="a-body">
+              <span class="a-role">Agency Arm</span>
+              <h4>Nexova Digital</h4>
+              <span class="a-url">launching soon</span>
+              <p class="a-desc">Done-for-you agency. Closes enterprise merchants.</p>
+              <div class="a-tags">
+                <span class="pill pill-soon">Soon</span>
+                <span class="pill pill-blue">Enterprise</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 19 · ECOSYSTEM MAP                                 -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-dark">
+      <div class="slide-no">19</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 04 · Ecosystem Map</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">How they connect</div>
+        <h2 class="headline">Every path leads to <span class="accent">Lean.x</span>.</h2>
+      </div>
+
+      <div class="body" style="margin-top: 28px;">
+        <div class="eco-wrap">
+
+          <!-- STAGE 1: ACQUIRE (3 channels) -->
+          <div class="eco-stage acquire">
+            <div class="eco-cell">
+              <span class="badge">via Nexova</span>
+              <span class="l">Acquire</span>
+              <span class="n">googleadsagency.my</span>
+              <span class="u">PPC search intent · can also link direct to Lean.x</span>
+            </div>
+            <div class="eco-cell">
+              <span class="badge">via Nexova</span>
+              <span class="l">Acquire</span>
+              <span class="n">facebookads.my</span>
+              <span class="u">META ad intent · can also link direct to Lean.x</span>
+            </div>
+            <div class="eco-cell">
+              <span class="badge direct">Direct</span>
+              <span class="l">Acquire</span>
+              <span class="n">Lean.x Social Media</span>
+              <span class="u">IG · TikTok · FB · LinkedIn — straight to leanx.io</span>
+            </div>
+          </div>
+
+          <!-- BRIDGE: route split -->
+          <div class="eco-bridge">
+            <div class="b-arrow"><strong>Route A</strong> <span class="ar">↓</span> via Nexova</div>
+            <div class="b-split"><span>Two routes</span><span class="sp">both end at Lean.x</span></div>
+            <div class="b-arrow"><strong>Route B</strong> <span class="ar">↓</span> direct to Lean.x</div>
+          </div>
+
+          <!-- STAGE 2: CONVERT (Nexova layer) -->
+          <div class="eco-stage convert">
+            <div class="eco-cell hub">
+              <span class="l">Build</span>
+              <span class="n">Nexova Builder</span>
+              <span class="u">nexova.my · DIY</span>
+            </div>
+            <div class="eco-cell hub">
+              <span class="l">Close</span>
+              <span class="n">Nexova Digital</span>
+              <span class="u">DFY agency · soon</span>
+            </div>
+          </div>
+
+          <!-- STAGE 3: DESTINATION -->
+          <div class="eco-stage dest">
+            <div class="eco-cell dest">
+              <span class="l">Destination</span>
+              <span class="n">Lean.x — leanx.io</span>
+              <span class="u">Merchants · GMV · recurring billing</span>
+            </div>
+          </div>
+
+          <!-- NOTES -->
+          <div class="eco-notes">
+            <div class="eco-note">
+              <div class="pno">— Route A</div>
+              <h5>The long route</h5>
+              <p>Satellites capture intent &rarr; sign up to Nexova &rarr; build &amp; publish &rarr; take payments via Lean.x.</p>
+            </div>
+            <div class="eco-note">
+              <div class="pno">— Route B</div>
+              <h5>The direct route</h5>
+              <p>Satellites and Lean.x Social can link straight to leanx.io &mdash; merchants sign up without touching Nexova.</p>
+            </div>
+            <div class="eco-note">
+              <div class="pno">— Compounding</div>
+              <h5>Owned channels</h5>
+              <p>Articles, posts &amp; social are permanent inventory. SEO + social compound when ad spend pauses.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 20 · FOUR LAYERS                                   -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-alt">
+      <div class="slide-no">20</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 05 · The Four Layers</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">The merchant journey</div>
+        <h2 class="headline">Acquire. Activate. Convert. <span class="accent">Retain.</span></h2>
+      </div>
+
+      <div class="body" style="margin-top: 32px;">
+        <div class="layers">
+          <div class="layer-card">
+            <span class="l-step">Layer 01</span>
+            <h4>Acquire</h4>
+            <p>SEO satellites + Lean.x Social Media + Nexova SEO + Nexova Digital. Owned channels, low CAC.</p>
+            <span class="l-tag">Near-zero CAC</span>
+          </div>
+          <div class="layer-card">
+            <span class="l-step">Layer 02</span>
+            <h4>Activate</h4>
+            <p>Templates + Academy + onboarding + AI Chat get a first site live quickly.</p>
+            <span class="l-tag">Fast time-to-publish</span>
+          </div>
+          <div class="layer-card">
+            <span class="l-step">Layer 03</span>
+            <h4>Convert</h4>
+            <p>Native Lean.x checkout + Premium subscription + EasyParcel + Pixel + CAPI.</p>
+            <span class="l-tag">Lean.x at every cash moment</span>
+          </div>
+          <div class="layer-card">
+            <span class="l-step">Layer 04</span>
+            <h4>Retain</h4>
+            <p>WhatsApp recovery + premium templates + AI Studio tokens + bump offers.</p>
+            <span class="l-tag">More transactions per merchant</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 21 · CONVERSION FUNNEL                             -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-light">
+      <div class="slide-no">21</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 06 · The Conversion Funnel</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">From reach to revenue</div>
+        <h2 class="headline">How marketing <span class="accent">becomes Lean.x revenue</span>.</h2>
+      </div>
+
+      <div class="body" style="margin-top: 18px;">
+        <div class="funnel-wrap">
+
+          <!-- LEFT: visual funnel (numbers only, always fits) -->
+          <div class="funnel-shapes">
+            <div class="f-shape f-shape-1"><span class="f-num">01</span></div>
+            <div class="f-shape f-shape-2"><span class="f-num">02</span></div>
+            <div class="f-shape f-shape-3"><span class="f-num">03</span></div>
+            <div class="f-shape f-shape-4"><span class="f-num">04</span></div>
+            <div class="f-shape f-shape-5"><span class="f-num">05</span></div>
+          </div>
+
+          <!-- RIGHT: stage-mapped details -->
+          <div class="funnel-details">
+
+            <div class="f-detail">
+              <span class="fd-tag">Reach</span>
+              <div class="fd-body">
+                <h5>Awareness across owned channels.</h5>
+                <p>SEO satellites + Lean.x Social + Nexova SEO + paid ads put Lean.x in front of Malaysian SMBs.</p>
+              </div>
+              <span class="fd-earn">Brand visibility</span>
+            </div>
+
+            <div class="f-detail">
+              <span class="fd-tag">Visit</span>
+              <div class="fd-body">
+                <h5>Two landing destinations.</h5>
+                <p>Traffic lands on <strong>nexova.my</strong> (DIY merchants) or <strong>leanx.io</strong> (gateway-ready merchants).</p>
+              </div>
+              <span class="fd-earn">Qualified traffic</span>
+            </div>
+
+            <div class="f-detail">
+              <span class="fd-tag">Sign Up</span>
+              <div class="fd-body">
+                <h5>Two parallel signup paths.</h5>
+                <p>Route A: Nexova account &rarr; build a site. Route B: direct Lean.x onboarding. Both end at Lean.x.</p>
+              </div>
+              <span class="fd-earn">New merchant accounts</span>
+            </div>
+
+            <div class="f-detail">
+              <span class="fd-tag">Activate</span>
+              <div class="fd-body">
+                <h5>First Lean.x transaction.</h5>
+                <p>Merchant publishes site &amp; takes first Lean.x payment. Or direct Lean.x integration goes live.</p>
+              </div>
+              <span class="fd-earn">First fee + Pixel/CAPI</span>
+            </div>
+
+            <div class="f-detail f-detail-5">
+              <span class="fd-tag">Retain</span>
+              <div class="fd-body">
+                <h5>Recurring, compounding revenue.</h5>
+                <p>GMV fees + Premium RM79/mo + AI Studio tokens + Template purchases + bump offers per merchant.</p>
+              </div>
+              <span class="fd-earn">Monthly billing per merchant</span>
+            </div>
+
+          </div>
+
+          <div class="funnel-callout">
+            <div class="fc-l">— The compounding effect</div>
+            <p>Once a merchant activates, they generate <strong>multiple Lean.x revenue lines simultaneously</strong>. Meanwhile, satellites + social keep adding new merchants without rising CAC &mdash; the funnel widens at the top and deepens at the bottom.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 22 · REVENUE MAP                                   -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-light">
+      <div class="slide-no">22</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 07 · Lean.x Revenue Map</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Every piece earns</div>
+        <h2 class="headline">Each component <span class="accent">becomes a Lean.x revenue line</span>.</h2>
+      </div>
+
+      <div class="body" style="margin-top: 24px;">
+        <div class="table-wrap">
+          <table class="rev">
+            <thead>
+              <tr>
+                <th style="width: 32%;">Component</th>
+                <th>How it makes Lean.x money</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="strong">SEO satellites</td><td>Funnel intent traffic to Nexova or direct to Lean.x</td></tr>
+              <tr><td class="strong">Lean.x Social Media</td><td>Direct merchant acquisition to leanx.io via social channels</td></tr>
+              <tr><td class="strong">Nexova Builder</td><td>Hosts the Lean.x checkout the merchant runs</td></tr>
+              <tr><td class="strong">Nexova Digital (agency)</td><td><span class="accent">High-value enterprise Lean.x merchants</span></td></tr>
+              <tr><td class="strong">Lean.x checkout</td><td><span class="accent">Direct transaction processing fees</span></td></tr>
+              <tr><td class="strong">Premium RM79 / mo</td><td><span class="accent">Recurring Lean.x billing per Premium user</span></td></tr>
+              <tr><td class="strong">AI Studio tokens</td><td><span class="accent">Secondary Lean.x transactions per user</span></td></tr>
+              <tr><td class="strong">Bump offers &amp; upsells</td><td>Higher AOV on every Lean.x transaction</td></tr>
+              <tr><td class="strong">EasyParcel + COD</td><td>Expands the merchant base that can sell physical goods</td></tr>
+              <tr><td class="strong">Meta CAPI / GA4 / GTM</td><td>Merchants prove ROAS, keep spending, Lean.x GMV grows</td></tr>
+              <tr><td class="strong">WhatsApp follow-up</td><td>Direct recovery on failed Lean.x payments</td></tr>
+              <tr><td class="strong">Template Marketplace</td><td><span class="accent">Premium template sales processed via Lean.x</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 23 · MONTHLY SCORECARD                             -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-dark">
+      <div class="slide-no">23</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 08 · Monthly Scorecard</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Reported every month</div>
+        <h2 class="headline">Lean.x gets a <span class="accent">full report card</span>.</h2>
+      </div>
+
+      <div class="body" style="margin-top: 32px;">
+        <div class="score-grid">
+          <div class="score-card">
+            <div class="s-no">01</div>
+            <h4>Acquisition</h4>
+            <ul>
+              <li>Signups</li>
+              <li>Traffic by source</li>
+              <li>CAC by channel</li>
+              <li>DFY pipeline</li>
+            </ul>
+          </div>
+          <div class="score-card">
+            <div class="s-no">02</div>
+            <h4>Activation</h4>
+            <ul>
+              <li>Activation rate</li>
+              <li>Templates used</li>
+              <li>Time to first publish</li>
+              <li>Drop-off points</li>
+            </ul>
+          </div>
+          <div class="score-card">
+            <div class="s-no">03</div>
+            <h4>Conversion</h4>
+            <ul>
+              <li>New Lean.x merchants</li>
+              <li>Premium subscriptions</li>
+              <li>AI token transactions</li>
+              <li>Bump offer take-rate</li>
+            </ul>
+          </div>
+          <div class="score-card">
+            <div class="s-no">04</div>
+            <h4>GMV &amp; Health</h4>
+            <ul>
+              <li>GMV processed</li>
+              <li>Average order value</li>
+              <li>Recovery rate</li>
+              <li>Projected merchant LTV</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 24 · THE ASK                                       -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-dark">
+      <div class="slide-no">24</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 09 · The Investment</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div class="body">
+        <div class="ask-wrap">
+
+          <div class="ask-num">
+            <span class="ask-l">Monthly operating ask</span>
+            <span class="ask-big"><span class="currency">RM</span>12,000</span>
+            <span class="ask-unit">per month · all-in</span>
+          </div>
+
+          <div class="ask-copy">
+            <h3>The platform is built.<br>The assets are live.<br>This is what runs them.</h3>
+            <p>The remaining ask is the <strong>operating budget</strong> that turns four owned properties into a constant flow of Lean.x merchants.</p>
+            <p>No more build cost. No more hidden line items. One number, every month, fully allocated across paid media, content, infrastructure, and the agency launch.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 25 · BUDGET BREAKDOWN                              -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-light">
+      <div class="slide-no">25</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> 10 · Where the budget goes</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Budget breakdown</div>
+        <h2 class="headline">Every ringgit, <span class="accent">accounted for</span>.</h2>
+      </div>
+
+      <div class="body" style="margin-top: 24px;">
+        <div class="budget-wrap">
+          <table class="budget">
+            <thead>
+              <tr>
+                <th style="width: 26%;">Bucket</th>
+                <th style="width: 26%;">Powers</th>
+                <th style="width: 34%;">What it buys</th>
+                <th class="r" style="width: 14%;">RM / month</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="bucket">Google Ads spend</td>
+                <td class="what">googleadsagency.my + nexova.my</td>
+                <td class="what">PPC for "google ads agency Malaysia" + Nexova intent terms</td>
+                <td class="r">2,500</td>
+              </tr>
+              <tr>
+                <td class="bucket">META Ads spend</td>
+                <td class="what">facebookads.my + nexova.my</td>
+                <td class="what">Facebook / Instagram for SMB founders + retargeting</td>
+                <td class="r">2,500</td>
+              </tr>
+              <tr>
+                <td class="bucket">TikTok Ads spend</td>
+                <td class="what">nexova.my + Nexova Digital</td>
+                <td class="what">Founder content + DFY agency lead-gen ads</td>
+                <td class="r">1,000</td>
+              </tr>
+              <tr>
+                <td class="bucket">SEO &amp; outreach</td>
+                <td class="what">Both satellites + nexova.my</td>
+                <td class="what">Ahrefs, Surfer SEO, paid backlinks &amp; guest posts</td>
+                <td class="r">1,500</td>
+              </tr>
+              <tr>
+                <td class="bucket">AI &amp; creative tools</td>
+                <td class="what">All assets</td>
+                <td class="what">ChatGPT Team, Claude, Midjourney, Runway, Canva Pro</td>
+                <td class="r">1,200</td>
+              </tr>
+              <tr>
+                <td class="bucket">Hosting &amp; infrastructure</td>
+                <td class="what">nexova.my + satellites</td>
+                <td class="what">Vercel Pro, Supabase Pro, SSL pool, Sentry monitoring</td>
+                <td class="r">1,000</td>
+              </tr>
+              <tr>
+                <td class="bucket">Messaging &amp; recovery</td>
+                <td class="what">nexova.my</td>
+                <td class="what">WhatsApp Business API, transactional email, SMS</td>
+                <td class="r">700</td>
+              </tr>
+              <tr>
+                <td class="bucket">Influencer &amp; KOL</td>
+                <td class="what">nexova.my + Nexova Digital</td>
+                <td class="what">Micro-KOL collabs in Malaysian SMB / e-commerce niches</td>
+                <td class="r">800</td>
+              </tr>
+              <tr>
+                <td class="bucket">Nexova Digital launch</td>
+                <td class="what">Nexova Digital</td>
+                <td class="what">Landing site, sales collateral, lead-form tooling</td>
+                <td class="r">800</td>
+              </tr>
+              <tr class="total">
+                <td>Total monthly</td>
+                <td colspan="2"></td>
+                <td class="r">RM 12,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 26 · JUSTIFICATION                                 -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-light">
+      <div class="slide-no">26</div>
+      <div class="slide-head">
+        <div class="crumb"><span class="dot"></span> Why this budget</div>
+        <div class="brand-mark">Nexova × Lean.x</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Asset by asset</div>
+        <h2 class="headline">Built. Live. <span class="accent">Waiting for fuel.</span></h2>
+      </div>
+
+      <div class="body" style="margin-top: 24px;">
+        <div class="just-grid">
+
+          <div class="just-card">
+            <span class="j-tag pill-soon">Owned</span>
+            <h4>googleadsagency.my</h4>
+            <p class="j-row"><strong>Shipped:</strong> pillar articles live, recommendations to Nexova + Lean.x, full technical SEO.</p>
+            <p class="j-row"><strong>Budget unlocks:</strong> Google Ads on commercial keywords + content + backlinks.</p>
+            <p class="j-row"><strong>Lean.x value:</strong> direct gateway recommendations + Nexova merchant signups.</p>
+          </div>
+
+          <div class="just-card">
+            <span class="j-tag pill-soon">Owned</span>
+            <h4>facebookads.my</h4>
+            <p class="j-row"><strong>Shipped:</strong> pillar articles, Nexova recommendations, full SEO foundation.</p>
+            <p class="j-row"><strong>Budget unlocks:</strong> META spend on Malaysian SMB founders + Lean.x recommendation upgrade.</p>
+            <p class="j-row"><strong>Lean.x value:</strong> the largest funnel of new SMB merchants into Nexova checkouts.</p>
+          </div>
+
+          <div class="just-card">
+            <span class="j-tag pill-blue">Direct</span>
+            <h4>Lean.x Social Media</h4>
+            <p class="j-row"><strong>Shipped:</strong> social channels active, content driving awareness for Lean.x directly.</p>
+            <p class="j-row"><strong>Budget unlocks:</strong> boosted posts, social ad spend, content creation.</p>
+            <p class="j-row"><strong>Lean.x value:</strong> direct merchant acquisition to leanx.io, bypassing the Nexova funnel entirely.</p>
+          </div>
+
+          <div class="just-card">
+            <span class="j-tag pill-purp">Core</span>
+            <h4>nexova.my</h4>
+            <p class="j-row"><strong>Shipped:</strong> 50+ phases, 25+ templates, native Lean.x checkout, Premium, AI Studio, Academy, EasyParcel.</p>
+            <p class="j-row"><strong>Budget unlocks:</strong> paid ads to fill the funnel + AI / hosting / WhatsApp credits.</p>
+            <p class="j-row"><strong>Lean.x value:</strong> every active Nexova merchant runs Lean.x + Premium + AI tokens.</p>
+          </div>
+
+          <div class="just-card">
+            <span class="j-tag pill-blue">Enterprise</span>
+            <h4>Nexova Digital — soon</h4>
+            <p class="j-row"><strong>Status:</strong> agency arm scoped and ready to launch &mdash; the DFY route to high-AOV merchants.</p>
+            <p class="j-row"><strong>Budget unlocks:</strong> launch site, sales collateral, lead-gen ads.</p>
+            <p class="j-row"><strong>Lean.x value:</strong> highest-ticket merchants on the gateway, longer LTV than DIY.</p>
+          </div>
+
+        </div>
+
+        <div class="math-callout">
+          <div class="m-l">The Math</div>
+          <p>RM 12,000 / month is the cost of running an ecosystem that <strong>already exists</strong>. Break-even is reached the moment the budget produces additional Lean.x merchants whose combined recurring fees + GMV processing exceed RM 12,000 &mdash; a low bar for a payment gateway.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 27 · CLOSING                                       -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="slide slide-dark closing">
+      <div class="slide-no">27</div>
+      <div>
+        <div class="eyebrow" style="margin-bottom: 24px;">— The ask, one more time</div>
+        <h1>Six assets.<br>One <span class="accent">destination</span>.</h1>
+        <p>The ecosystem is built. Live. Reporting-ready.<br>Next phase: <strong style="color: #fff;">scale</strong>.</p>
+        <div class="next">
+          <span class="nx">RM 12,000 / month</span>
+          <span class="nx">Monthly scorecard to Lean.x</span>
+          <span class="nx">Quarterly review cadence</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- DECK CONTROLS -->
+  <div class="controls">
+    <button id="prevBtn" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <div class="counter"><span id="curSlide">1</span><span class="of">/</span><span id="totalSlides">25</span></div>
+    <button id="nextBtn" aria-label="Next slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </div>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const total = slides.length;
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const curEl = document.getElementById('curSlide');
+      const totalEl = document.getElementById('totalSlides');
+      const bar = document.getElementById('progressBar');
+
+      let current = 0;
+      totalEl.textContent = total;
+
+      function go(idx) {
+        if (idx < 0 || idx >= total) return;
+        slides[current].classList.remove('active');
+        slides[idx].classList.add('active');
+        current = idx;
+        curEl.textContent = idx + 1;
+        bar.style.width = ((idx + 1) / total * 100) + '%';
+        history.replaceState(null, '', '#' + (idx + 1));
+      }
+
+      function next() { go(Math.min(current + 1, total - 1)); }
+      function prev() { go(Math.max(current - 1, 0)); }
+
+      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', next);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); next(); }
+        else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+        else if (e.key === 'Home') { e.preventDefault(); go(0); }
+        else if (e.key === 'End') { e.preventDefault(); go(total - 1); }
+      });
+
+      const hash = parseInt(window.location.hash.replace('#', ''), 10);
+      if (!isNaN(hash) && hash >= 1 && hash <= total) {
+        go(hash - 1);
+      } else {
+        bar.style.width = (1 / total * 100) + '%';
+      }
+    })();
+  </script>
+
+</body>
+</html>
